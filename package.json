@@ -1,0 +1,37 @@
+{
+  "name": "dotnet-2.0.0",
+  "version": "0.1.0",
+  "description": "Platform Agnostic utility/library to install dotnet frameworks into a folder",
+  "engines": {
+    "node": ">=7.10.0"
+  },
+  "main": "./dist/app.js",
+  "typings": "./dist/main.d.ts",
+  "bin": {
+    "dotnet": "./dist/call.js",
+    "dotnet-run": "./dist/call.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "tsc",
+    "start": "node dist/app.js",
+    "postinstall": "node dist/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olydis/dotnet-2.0.0.git"
+  },
+  "keywords": [
+    "dotnet",
+    "runtime",
+    "install"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^8.0.22",
+    "@types/npm": "^2.0.28"
+  },
+  "dependencies": {
+    "npm": "^5.0.3"
+  }
+}
