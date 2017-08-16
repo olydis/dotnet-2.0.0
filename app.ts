@@ -3,7 +3,7 @@
 import * as os from 'os';
 import * as path from 'path';
 import * as fs from 'fs';
-import { load, commands } from "npm";
+import { fork } from 'child_process';
 
 /**
  * helper functions
@@ -11,14 +11,12 @@ import { load, commands } from "npm";
 
 async function install(targetFolder: string, packageName: string): Promise<void> {
   // load
-  const cfg = await new Promise<any>((res, rej) => load({ registry: "https://registry.npmjs.org/" }, (err, cc) => err ? rej(err) : res(cc)));
+  const npmPath = require.resolve("npm/package.json");
+  const mainPath = require("npm/package.json").bin.npm;
 
-  // config
-  cfg.localPrefix = targetFolder;
-  cfg.prefix = targetFolder;
-
-  // install
-  await new Promise<void>((res, rej) => commands.install([packageName], err => err ? rej(err) : res()));
+  await new Promise(res => fs.mkdir(targetFolder, () => res()));
+  const cp = fork(path.join(npmPath, "..", mainPath), ["i", packageName], { cwd: targetFolder });
+  return new Promise<void>(res => cp.once("exit", res));
 }
 
 const fileExists = (path: string | Buffer): Promise<boolean> => new Promise<boolean>((r, j) => fs.stat(path, err => err ? r(false) : r(true)));
