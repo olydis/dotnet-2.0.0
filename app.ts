@@ -15,7 +15,6 @@ async function install(targetFolder: string, packageName: string): Promise<void>
 
   // config
   cfg.localPrefix = targetFolder;
-  cfg.globalPrefix = targetFolder;
   cfg.prefix = targetFolder;
 
   // install
