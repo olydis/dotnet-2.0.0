@@ -9,7 +9,8 @@
   "typings": "./dist/main.d.ts",
   "bin": {
     "dotnet": "./dist/call.js",
-    "dotnet-run": "./dist/call.js"
+    "dotnet-run": "./dist/call.js",
+    "dotnet-2.0.0": "./dist/app.js"
   },
   "scripts": {
     "build": "tsc",

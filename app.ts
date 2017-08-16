@@ -47,15 +47,20 @@ function detectArchitecture(): string {
  */
 
 const dotnetVersion = "2.0.0";
-const pathOption = process.env.DOTNET_SHARED_HOME || path.normalize(`${os.homedir()}/.net-${dotnetVersion}`);
+const pathOption = process.env.DOTNET_SHARED_HOME || path.normalize(`${os.homedir()}/.net/${dotnetVersion}`);
 const archOption = process.env.DOTNET_SHARED_ARCH || detectArchitecture();
 const packageName = `dotnet-${dotnetVersion}-${archOption}`;
 
 async function main() {
+  const force = process.argv.indexOf("--force") !== -1;
   // derive paths
   const packagePath = path.join(pathOption, `node_modules/${packageName}/`);
   const packageFilePath = packagePath + "package.json";
   try {
+    // force? => remove folder first
+    if (force) {
+      await new Promise<void>((res, rej) => require("npm/node_modules/rimraf")(pathOption, (err: any) => err ? rej(err) : res()));
+    }
     // install
     if (!await fileExists(packageFilePath)) {
       await install(pathOption, packageName);
