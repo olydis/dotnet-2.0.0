@@ -1,6 +1,6 @@
 {
   "name": "dotnet-2.0.0",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Platform Agnostic utility/library to install dotnet frameworks into a folder",
   "engines": {
     "node": ">=7.10.0"
@@ -29,9 +29,10 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^8.0.22",
-    "@types/npm": "^2.0.28"
+    "@types/npm": "^2.0.28",
+    "typescript": "^2.4.2"
   },
   "dependencies": {
-    "npm": "^5.0.3"
+    "npm": "^5.3.0"
   }
 }
