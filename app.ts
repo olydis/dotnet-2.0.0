@@ -10,11 +10,10 @@ import { fork } from 'child_process';
  */
 
 async function install(targetFolder: string, packageName: string): Promise<void> {
-  // load
   const npmPath = require.resolve("npm/package.json");
   const mainPath = require("npm/package.json").bin.npm;
 
-  await new Promise(res => fs.mkdir(targetFolder, () => res()));
+  await new Promise(res => require("npm/node_modules/mkdirp")(targetFolder, () => res()));
   const cp = fork(path.join(npmPath, "..", mainPath), ["i", packageName], { cwd: targetFolder });
   return new Promise<void>(res => cp.once("exit", res));
 }
