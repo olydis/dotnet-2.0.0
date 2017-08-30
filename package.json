@@ -1,16 +1,16 @@
 {
   "name": "dotnet-2.0.0",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "Platform Agnostic utility/library to install dotnet frameworks into a folder",
   "engines": {
-    "node": ">=7.10.0"
+    "node": ">=6.4.0"
   },
   "main": "./dist/app.js",
   "typings": "./dist/main.d.ts",
   "bin": {
     "dotnet": "./dist/call.js",
     "dotnet-run": "./dist/call.js",
-    "dotnet-2.0.0": "./dist/app.js"
+    "-dotnet": "./dist/app.js"
   },
   "scripts": {
     "build": "tsc",
@@ -34,6 +34,6 @@
     "typescript": "^2.4.2"
   },
   "dependencies": {
-    "npm": "^5.3.0"
+    "yarn": "^0.27.5"
   }
 }

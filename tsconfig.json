@@ -13,12 +13,12 @@
     "declaration": true,
     "stripInternal": true,
     "noEmitHelpers": false,
-    "target": "es2017",
+    "target": "es6",
     "types": [
       "node"
     ],
     "lib": [
-      "esnext"
+      "es6"
     ],
     "experimentalDecorators": true,
     "newLine": "LF"

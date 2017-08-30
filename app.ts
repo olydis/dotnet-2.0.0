@@ -10,11 +10,11 @@ import { fork } from 'child_process';
  */
 
 async function install(targetFolder: string, packageName: string): Promise<void> {
-  const npmPath = require.resolve("npm/package.json");
-  const mainPath = require("npm/package.json").bin.npm;
+  const npmPath = require.resolve("yarn/package.json");
+  const mainPath = require("yarn/package.json").bin.yarn;
 
-  await new Promise(res => require("npm/node_modules/mkdirp")(targetFolder, () => res()));
-  const cp = fork(path.join(npmPath, "..", mainPath), ["i", packageName], { cwd: targetFolder });
+  await new Promise(res => require("mkdirp")(targetFolder, () => res()));
+  const cp = fork(path.join(npmPath, "..", mainPath), ["add", packageName], { cwd: targetFolder });
   return new Promise<void>(res => cp.once("exit", res));
 }
 
@@ -55,7 +55,7 @@ async function main() {
   try {
     // force? => remove folder first
     if (force) {
-      await new Promise<void>((res, rej) => require("npm/node_modules/rimraf")(pathOption, (err: any) => err ? rej(err) : res()));
+      await new Promise<void>((res, rej) => require("rimraf")(pathOption, (err: any) => err ? rej(err) : res()));
     }
     // install
     if (!await fileExists(packageFilePath)) {
