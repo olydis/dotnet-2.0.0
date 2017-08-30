@@ -4,7 +4,7 @@
     - spots that differ are (to be) marked with COWBELL
 -->
 
-# DotNet 2.0.0 Runtime<!--COWBELL-->
+# .NET Core 2.0.0 Runtime<!--COWBELL-->
 
 This package installs the .NET Core 2.0 Runtime<!--COWBELL--> for your platform and provides the `dotnet` executable.
 
