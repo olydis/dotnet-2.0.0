@@ -4,6 +4,33 @@ import * as os from 'os';
 import * as path from 'path';
 import * as fs from 'fs';
 import { fork } from 'child_process';
+import * as fsm from 'fs-monkey';
+import {vol} from 'memfs';
+import {ufs} from 'unionfs';
+
+const f = fs;
+
+
+console.log ("hi");
+vol.fromJSON({'c:\\foo\\bar.js': 'console.log("obi trice");'});
+ufs.use(vol);
+  //.use(fs);
+
+  fsm.patchFs(vol,fs);
+console.log ("There");
+console.log(f.readFileSync("/foo/bar.js",'utf8'));
+
+console.log( f ==fs)
+
+require('/foo/bar.js'); // obi trice
+console.log ("dude");
+const m = `"${__dirname.replace(/\\/g,"/")}/../node_modules/`;
+var n = fs.readFileSync("${__dirname}/../yarn/squish.fs.json",'utf8');
+//n = n.replace(/"\/node_modules\//g,`${m}`);
+//console.log(n);
+const node_modules = vol.fromJSON(JSON.parse(n));
+//ufs.use(node_modules).use(fs);
+//patchRequire(node_modules);
 
 /**
  * helper functions
@@ -13,7 +40,7 @@ async function install(targetFolder: string, packageName: string): Promise<void>
   const npmPath = require.resolve("yarn/package.json");
   const mainPath = require("yarn/package.json").bin.yarn;
 
-  await new Promise(res => require("mkdirp")(targetFolder, () => res()));
+  await new Promise(res => require("node_modules/mkdirp")(targetFolder, () => res()));
   const cp = fork(path.join(npmPath, "..", mainPath), ["add", packageName], { cwd: targetFolder });
   return new Promise<void>(res => cp.once("exit", res));
 }
@@ -55,7 +82,7 @@ async function main() {
   try {
     // force? => remove folder first
     if (force) {
-      await new Promise<void>((res, rej) => require("rimraf")(pathOption, (err: any) => err ? rej(err) : res()));
+      await new Promise<void>((res, rej) => require(`/node_modules/rimraf`)(pathOption, (err: any) => err ? rej(err) : res()));
     }
     // install
     if (!await fileExists(packageFilePath)) {
