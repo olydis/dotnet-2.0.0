@@ -1,14 +1,17 @@
 {
-  "name": "x",
+  "name": "build-yarn-staticfs",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "builds the static fs file for yarn",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "node ./create-static-fs"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "yarn": "^0.27.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olydis/dotnet-2.0.0.git"
   }
 }

@@ -1,10 +1,11 @@
 !dist/
+dist/package-path.json
 test/
 dist/test/
 dist/package/
-!node_modules/npm
 package/
 .npmignore
+.vscode/
 tsconfig.json
 *.js.map
 *.ts
