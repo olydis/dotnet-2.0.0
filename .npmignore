@@ -5,12 +5,12 @@ dist/test/
 yarn/
 *.d.ts
 dist/package/
+dist/fs-monkey/demo
 package/
 .npmignore
 .vscode/
 tsconfig.json
 *.js.map
 *.ts
-!*.d.ts
 *.tgz
 *.tar
