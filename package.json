@@ -14,9 +14,10 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepare": " shx rm -rf ./dist/ && tsc && shx cp -R ./node_modules/fs-monkey/lib/ ./dist/fs-monkey/ && cd ./yarn && npm install",
+    "prepare": "shx rm -rf ./dist/ && tsc && shx cp -R ./node_modules/fs-monkey/lib/ ./dist/fs-monkey/ && cd ./yarn && npm install",
     "start": "node dist/app.js",
-    "postinstall": "node dist/app.js"
+    "_postinstall": "node dist/app.js",
+    "postinstall": "node -e \"try { fs.statSync(`./dist/app.js`) ; require(`./dist/app.js`)} catch (E){}\""
   },
   "repository": {
     "type": "git",
@@ -36,8 +37,7 @@
     "@types/node": "^8.0.22",
     "typescript": "^2.4.2",
     "fs-monkey": "~0.2.1",
-    "shx" : "~0.2.2"
+    "shx": "~0.2.2"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
