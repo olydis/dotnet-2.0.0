@@ -13,7 +13,7 @@
     "-dotnet": "./dist/app.js"
   },
   "scripts": {
-    "publish-preview" : "npm install && npm publish --tag preview",
+    "publish-preview": "npm install && npm publish --tag preview",
     "build": "tsc",
     "prepare": "shx rm -rf ./dist/ && tsc && shx cp -R ./node_modules/fs-monkey/lib/ ./dist/fs-monkey/ && cd ./yarn && npm install",
     "start": "node dist/app.js",
